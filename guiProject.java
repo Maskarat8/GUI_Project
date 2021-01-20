@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class guiProject {
 
@@ -55,17 +57,17 @@ dateLabel.setBackground(Color.LIGHT_GRAY);
 dateLabel.setForeground(Color.MAGENTA);
 dateLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
 dateLabel.setBounds(102, 22, 225, 45);
-DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
-  LocalDateTime now = LocalDateTime.now();
-  dateLabel.setText(dateLabel.getText()+dtf.format(now));
+DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+LocalDateTime now = LocalDateTime.now();
+dateLabel.setText(dateLabel.getText()+dtf.format(now));
 frame.getContentPane().add(dateLabel);
 
 
-JLabel goalLabel = new JLabel("/    3");
+JLabel goalLabel = new JLabel("/ 3");
 goalLabel.setForeground(Color.MAGENTA);
 goalLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 17));
 goalLabel.setHorizontalAlignment(SwingConstants.CENTER);
-goalLabel.setBounds(83, 193, 45, 40);
+goalLabel.setBounds(70, 193, 45, 40);
 frame.getContentPane().add(goalLabel);
 
 
@@ -73,7 +75,7 @@ JLabel doneThingsLabel = new JLabel("0");
 doneThingsLabel.setForeground(Color.MAGENTA);
 doneThingsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 doneThingsLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 17));
-doneThingsLabel.setBounds(39, 193, 45, 40);
+doneThingsLabel.setBounds(47, 193, 45, 40);
 frame.getContentPane().add(doneThingsLabel);
 
 
@@ -111,7 +113,7 @@ frame.getContentPane().add(failedButton1);
 JRadioButton completedButton1 = new JRadioButton("");
 completedButton1.setBackground(Color.GREEN);
 completedButton1.setHorizontalAlignment(SwingConstants.CENTER);
-completedButton1.setBounds(665, 139, 32, 30);
+completedButton1.setBounds(665, 133, 32, 30);
 frame.getContentPane().add(completedButton1);
 
 
@@ -132,7 +134,7 @@ frame.getContentPane().add(completedButton2);
 JRadioButton failedButton3 = new JRadioButton("");
 failedButton3.setBackground(Color.RED);
 failedButton3.setHorizontalAlignment(SwingConstants.CENTER);
-failedButton3.setBounds(665, 345, 32, 30);
+failedButton3.setBounds(665, 351, 32, 30);
 frame.getContentPane().add(failedButton3);
 
 
@@ -164,12 +166,48 @@ lblNewLabel_2.setBounds(198, 377, 111, 14);
 frame.getContentPane().add(lblNewLabel_2);
 
 
+
+ButtonGroup group1 = new ButtonGroup();
+group1.add(failedButton1);
+group1.add(completedButton1);
+
+ButtonGroup group2 = new ButtonGroup();
+group2.add(failedButton2);
+group2.add(completedButton2);
+
+ButtonGroup group3 = new ButtonGroup();
+group3.add(failedButton3);
+group3.add(completedButton3);
+
+
+
 JButton EndExitBtn = new JButton("FINITTO");
+EndExitBtn.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+
+int completedCounter = 0;
+
+if(completedButton1.isSelected()) {
+
+completedCounter++;
+}
+
+if(completedButton2.isSelected()) {
+
+completedCounter++;
+}
+
+if(completedButton3.isSelected()) {
+
+completedCounter++;
+}
+
+doneThingsLabel.setText(String.valueOf(completedCounter));
+}
+});
 EndExitBtn.setFont(new Font("Times New Roman", Font.BOLD, 20));
 EndExitBtn.setForeground(Color.MAGENTA);
 EndExitBtn.setBounds(462, 456, 129, 46);
 frame.getContentPane().add(EndExitBtn);
-
-
 }
 }
